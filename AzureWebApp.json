@@ -149,31 +149,6 @@
                 "Flow_Type": "Redfield",
                 "Application_Type": "web"
             }
-        },
-        {
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2019-10-01",
-            "name": "newWorkspaceTemplate",
-            "resourceGroup": "DefaultResourceGroup-CUS",
-            "subscriptionId": "[parameters('subscriptionId')]",
-            "properties": {
-                "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {},
-                    "variables": {},
-                    "resources": [
-                        {
-                            "apiVersion": "2020-08-01",
-                            "name": "DefaultWorkspace-91741cb3-7cb7-4a27-a01c-ff2daa32ace3-CUS",
-                            "type": "Microsoft.OperationalInsights/workspaces",
-                            "location": "Central US",
-                            "properties": {}
-                        }
-                    ]
-                }
-            }
         }
     ]
 }
