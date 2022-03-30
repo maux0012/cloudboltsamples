@@ -140,9 +140,6 @@
             "tags": {
                 "customer": "ukhs"
             },
-            "dependsOn": [
-                "newWorkspaceTemplate"
-            ],
             "properties": {
                 "ApplicationId": "[parameters('name')]",
                 "Request_Source": "IbizaWebAppExtensionCreate",
