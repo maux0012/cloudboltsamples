@@ -3,8 +3,8 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "subscriptionId": {
-            "type": "string", 
-            "defaultValue": "91741cb3-7cb7-4a27-a01c-ff2daa32ace3"
+            "type": "string",
+             "defaultValue": "2330df1b-ab9e-4d07-b950-34108f36698e"
         },
         "name": {
             "type": "string"
@@ -19,42 +19,19 @@
         },
         "serverFarmResourceGroup": {
             "type": "string",
-            "defaultValue": "cbpl-ukhs"
+            "defaultValue": "se-demo"
         },
         "alwaysOn": {
             "type": "bool",
-            "defaultValue": false
-        },
-        "sku": {
-            "type": "string",
-            "defaultValue": "shared"
-        },
-        "skuCode": {
-            "type": "string",
-            "allowedValues": [
-                "D1",
-                "B1"
-            ]
-        },
-        "workerSize": {
-            "type": "string",
-            "defaultValue": "0"
-        },
-        "workerSizeId": {
-            "type": "string",
-            "defaultValue": "0"
-        },
-        "numberOfWorkers": {
-            "type": "string",
-            "defaultValue": "1"
+             "defaultValue": false
         },
         "currentStack": {
             "type": "string",
-            "defaultValue": "dotnet"
+             "defaultValue": "dotnet"
         },
         "phpVersion": {
             "type": "string",
-            "defaultValue": "OFF"
+             "defaultValue": "OFF"
         },
         "netFrameworkVersion": {
             "type": "string",
@@ -68,12 +45,9 @@
             "name": "[parameters('name')]",
             "type": "Microsoft.Web/sites",
             "location": "[parameters('location')]",
-            "tags": {
-                "customer": "ukhs"
-            },
+            "tags": {},
             "dependsOn": [
-                "microsoft.insights/components/CloudBoltWebAppBP",
-                "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
+                "microsoft.insights/components/webappjmau01"
             ],
             "properties": {
                 "name": "[parameters('name')]",
@@ -81,11 +55,11 @@
                     "appSettings": [
                         {
                             "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                            "value": "[reference('microsoft.insights/components/CloudBoltWebAppBP', '2015-05-01').InstrumentationKey]"
+                            "value": "[reference('microsoft.insights/components/webappjmau01', '2015-05-01').InstrumentationKey]"
                         },
                         {
                             "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-                            "value": "[reference('microsoft.insights/components/CloudBoltWebAppBP', '2015-05-01').ConnectionString]"
+                            "value": "[reference('microsoft.insights/components/webappjmau01', '2015-05-01').ConnectionString]"
                         },
                         {
                             "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
@@ -111,40 +85,18 @@
             }
         },
         {
-            "apiVersion": "2018-11-01",
-            "name": "[parameters('hostingPlanName')]",
-            "type": "Microsoft.Web/serverfarms",
-            "location": "[parameters('location')]",
-            "kind": "",
-            "tags": {
-                "customer": "ukhs"
-            },
-            "dependsOn": [],
-            "properties": {
-                "name": "[parameters('hostingPlanName')]",
-                "workerSize": "[parameters('workerSize')]",
-                "workerSizeId": "[parameters('workerSizeId')]",
-                "numberOfWorkers": "[parameters('numberOfWorkers')]",
-                "zoneRedundant": false
-            },
-            "sku": {
-                "Tier": "[parameters('sku')]",
-                "Name": "[parameters('skuCode')]"
-            }
-        },
-        {
             "apiVersion": "2020-02-02-preview",
-            "name": "CloudBoltWebAppBP",
+            "name": "webappjmau01",
             "type": "microsoft.insights/components",
             "location": "centralus",
-            "tags": {
-                "customer": "ukhs"
-            },
+            "tags": {},
+            "dependsOn": [],
             "properties": {
                 "ApplicationId": "[parameters('name')]",
                 "Request_Source": "IbizaWebAppExtensionCreate",
                 "Flow_Type": "Redfield",
-                "Application_Type": "web"
+                "Application_Type": "web",
+                "WorkspaceResourceId": "/subscriptions/2330df1b-ab9e-4d07-b950-34108f36698e/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-2330df1b-ab9e-4d07-b950-34108f36698e-eus"
             }
         }
     ]
